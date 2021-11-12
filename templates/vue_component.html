@@ -1,0 +1,48 @@
+<script type="text/x-template" id="vue-component-template">
+<div class="p-3">
+    <b-form v-on:keydown.enter.prevent>
+        <b-form-input
+            v-model="pdb_id"
+            placeholder="Enter PDB ID"
+            required
+        ></b-form-input>
+        <b-button variant="secondary" size="sm" v-on:click="getPDB">
+            Retrieve PDB metadata
+        </b-button>
+    </b-form>
+    <ul v-if="pdb_exists">
+        <li>DFG: [[ this.DFG ]]</li>
+        <li>ac_Helix: [[ this.aC_helix ]]</li>
+    </ul>
+    <div v-if="pdb_exists">
+        <input type="hidden" v-model="DFG" name="dfg">
+        <input type="hidden" v-model="aC_helix" name="ac_helix">
+    </div>
+</div>
+</script>
+
+<script>
+var vue_component = {
+    template: '#vue-component-template',
+    delimiters: ['[[', ']]'],
+    data: function () {
+      return {
+        pdb_id: "",
+        pdb_exists: false,
+      }
+    },
+    methods: {
+        getPDB() {
+            axios.get("http://localhost:5000/pdb_id/" + this.pdb_id)
+                .then(response => {
+                    this.DFG = response.data.DFG;
+                    this.aC_helix = response.data.aC_helix;
+                    // Show the list of attributes
+                    this.pdb_exists = true;
+                }).catch(e => (
+                    console.log("There was an error!")
+                ))
+        }
+    }
+};
+</script>

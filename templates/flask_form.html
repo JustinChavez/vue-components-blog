@@ -1,0 +1,39 @@
+<!doctype html>
+
+<title>Vue Component + Flask</title>
+<head>
+    <!-- Load required Bootstrap and BootstrapVue CSS -->
+    <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css" />
+    <!-- Load Vue followed by BootstrapVue and Axios-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<div id="app" class='container'>
+  <form action="http://localhost:5000/flask_form/" method="POST" >
+    <h1>Flask Form Example</h1>
+    <p>Demonstrates how the Vue information is added to the form</p>
+    <div class="form-group">
+      <p>Select PDB Metadata</p>
+      <vue-component></vue-component>
+      <br>
+      <p>Job Name</p>
+      <input type="text" class="form-control" name="jobName" placeholder="Enter name">
+      <br>      
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+{% include 'vue_component.html' %}
+
+<script>
+    new Vue({
+        el: '#app',
+        components: {
+            'vue-component' : vue_component
+        } 
+    })
+</script>

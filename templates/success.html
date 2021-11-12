@@ -1,0 +1,20 @@
+<!doctype html>
+
+<title>Success Screen</title>
+<h1>Successfully recieved post request!</h1>
+
+{% if dfg %}
+  <p>DFG is {{ dfg }}</p>
+{% endif %}
+
+{% if ac_helix %}
+  <p>aC Helix is {{ ac_helix }}</p>
+{% endif %}
+
+{% if job_name %}
+  <p>Job Name is {{ job_name }}</p>
+{% endif %}
+
+{% if feature_vector %} 
+  <p>The feature vector looks like: {{ feature_vector }}</p>
+{% endif %}
