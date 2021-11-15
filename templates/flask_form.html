@@ -13,15 +13,15 @@
 
 <div id="app" class='container'>
   <form action="http://localhost:5000/flask_form/" method="POST" >
-    <h1>Flask Form Example</h1>
-    <p>Demonstrates how the Vue information is added to the form</p>
+    <h1>Featurize Protein Structure with a Vue Component</h1>
+    <br>
     <div class="form-group">
-      <p>Select PDB Metadata</p>
-      <vue-component></vue-component>
-      <br>
-      <p>Job Name</p>
+      <p>Task Name</p>
       <input type="text" class="form-control" name="jobName" placeholder="Enter name">
-      <br>      
+      <br>  
+      <p>Use the Vue component to retrieve PDB metadata</p>
+      <vue-component style="border:4px solid rgb(44, 147, 0);"></vue-component>
+      <br>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>

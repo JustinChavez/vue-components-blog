@@ -1,7 +1,11 @@
 <!doctype html>
 
 <title>Success Screen</title>
-<h1>Successfully recieved post request!</h1>
+<h1>Successfully received both HTML and Vue data!</h1>
+
+{% if job_name %}
+  <p>Job Name is {{ job_name }}</p>
+{% endif %}
 
 {% if dfg %}
   <p>DFG is {{ dfg }}</p>
@@ -9,10 +13,6 @@
 
 {% if ac_helix %}
   <p>aC Helix is {{ ac_helix }}</p>
-{% endif %}
-
-{% if job_name %}
-  <p>Job Name is {{ job_name }}</p>
 {% endif %}
 
 {% if feature_vector %} 

@@ -7,28 +7,6 @@ AC_CONFORMATION = ["in", "out", "na"]
 
 app = Flask(__name__)
 
-'''Frontend'''
-# Loads Vue component that renders the KLIFS selector
-@app.route("/frontend/")
-def vue_selector_example():
-    return render_template('frontend.html')
-
-# Embeds Vue component into a post form
-@app.route("/flask_form/", methods = ['POST', 'GET'])
-def vue_post_example():
-    if request.method == 'GET':
-        return render_template("flask_form.html")
-
-    elif request.method == 'POST':
-        job_name = request.form.get("jobName")
-        # Grab values from Vue Component
-        dfg = request.form.get("dfg")
-        ac_helix = request.form.get("ac_helix")
-
-        # Compute feature vector and display it as a Python List
-        feature_vector = one_hot_protein_features(dfg, ac_helix).numpy().tolist()
-        return render_template("success.html", job_name=job_name, dfg=dfg, ac_helix=ac_helix, feature_vector=feature_vector)
-
 '''Backend'''
 # Called by Vue to retrieve the properties of each PDB from KLIFS
 @app.route('/pdb_id/<pdb_id>', methods=['GET'])
@@ -49,6 +27,30 @@ def klifs_pdb_data(pdb_id):
         
     # Return the first set of PDB characteristics
     return data[0]
+    
+'''Frontend'''
+# Loads Vue component that renders the KLIFS selector
+@app.route("/frontend/")
+def vue_selector():
+    return render_template('frontend.html')
+
+# Embeds Vue component into a post form
+@app.route("/flask_form/", methods = ['POST', 'GET'])
+def vue_post():
+    if request.method == 'GET':
+        return render_template("flask_form.html")
+
+    elif request.method == 'POST':
+        job_name = request.form.get("jobName")
+        # Grab values from Vue Component
+        dfg = request.form.get("dfg")
+        ac_helix = request.form.get("ac_helix")
+
+        # Compute feature vector and display it as a Python List
+        feature_vector = one_hot_protein_features(dfg, ac_helix).numpy().tolist()
+        return render_template("success.html", job_name=job_name, dfg=dfg, ac_helix=ac_helix, feature_vector=feature_vector)
+
+
 
 def one_hot_protein_features(dfg, alpha_c):
     
