@@ -17,7 +17,7 @@
     <br>
     <div class="form-group">
       <p>Task Name</p>
-      <input type="text" class="form-control" name="jobName" placeholder="Enter name">
+      <input type="text" class="form-control" name="task_name" placeholder="Enter name">
       <br>  
       <p>Use the Vue component to retrieve PDB metadata</p>
       <vue-component style="border:4px solid rgb(44, 147, 0);"></vue-component>
@@ -25,6 +25,16 @@
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
+  {% if task_name and dfg and ac_helix %}
+    <br>
+    <div class="alert alert-success " role="alert">
+      <h4 class="alert-heading">Successfully Received Entire Form!</h4>
+      <p>Task Name: <b>{{task_name}}</b></p>
+      <p>DFG: <b>{{dfg}}</b></p>
+      <p>AC Helix: <b>{{ac_helix}}</b></p>
+    </div>
+  {% endif %}
+
 </div>
 
 {% include 'vue_component.html' %}
